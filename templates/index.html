@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container" style="margin:15vh;padding:30px;position:fixed;">
+    <h3 class="is-size-5">APK Classification</h3>
+    <br>
+    <form method="POST" enctype="multipart/form-data">
+        <div class="field">
+            <label class="label">Algorithm</label>
+            <div class="control">
+                <div class="select">
+                    <select name="algorithm" class="selectpicker form-control">
+                        {% for algorithm in algorithms %}
+                        <option value="{{ algorithm }}">{{ algorithm }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <br>
+        <div class="field">
+            <label class="label"> Upload App New</label>
+            <div class="control">
+                <div class="file">
+                    <input type="file" name="file" >
+                </div>
+            </div>
+            <br>
+            <input type="submit" class="button is-primary is-outlined is-small" value="Predict" class="form-control">
+             </form>
+
+
+    <div class="col ">
+        <div style="position:fixed;top:15vh;left:50vw;width:300px">
+            <h5 class="is-size-4">Output </h5>
+            <br>
+            {% if result == "Malware" %}
+            <h6 style="color:red ;" class="is-size-6">Predicted Class: &nbsp;       
+                Malware
+              </h6>{% endif %}
+            {% if result == "Benign(safe)" %}
+            <h6 class="is-size-6" style="color:green ;">Predicted Class: &nbsp;       
+                Benign(safe)
+              </h6>{% endif %}
+            <h6>Model Accuracy: {{ accuracy }} </h6>
+            <hr>
+            <h5 class="is-size-4">Metadata</h5>
+            <br>
+            <h6>App Name: {{ name }} </h6>
+            <h6>Target SDK Version: {{ sdk }} </h6>
+            <h6>File size: {{ size }} </h6>
+            <div id="" style="overflow:scroll; height:400px; width: fit-content;">
+            <h6>Permissions Requested : {{ perm }} </h6>
+            </div>
+            
+
+
+        </div>
+    </div>
+</div>
+</div>
+
+</div>
+</body>
+</html>
+{% endblock %}
